@@ -1,11 +1,11 @@
 # GitTour
 
 
-### Git 简介
+### 一、Git 简介
 
 Git——最流行的分布式版本控制系统。
 
-### 分布式（Git） VS. 集中式（CVS、 SVN）
+#### 分布式（Git） VS. 集中式（CVS、 SVN）
 
 CVS 和 SVN属于集中式版本控制系统，集中式版本控制系统最大的毛病就是必须要联网才能工作。
 
@@ -16,16 +16,16 @@ Git 属于分布式版本控制系统。
 
 Git 还有一个优势就是极其强大的分支管理。
 
-### Git 的安装
+### 二、Git 的安装
 - Linux
 - Mac OS
 - Windows
 
 
-### 一些概念
+### 三、一些概念
 
 
-#### 工作区和暂存区
+#### 1. 工作区和暂存区
 
 - 工作区（Working Directory）：在 git 管理下的普通文件夹都算是工作区，我们平时的编辑工作都是在工作区完成。
 - 暂存区（Stage）：临时区域，里面存放将要提交文件的快照。工作区所在的目录下有一个隐藏目录`.git`，这个不算工作区，而是Git的版本库。Git的版本库里存了很多东西，其中最重要的就是称为 stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支 master，以及指向master的一个指针叫 `HEAD`。
@@ -44,16 +44,17 @@ Git 还有一个优势就是极其强大的分支管理。
 ![](./img/0.jpg)
 ![](./img/1.png)
 
-#### 远程仓库（Remote repositories）
+#### 2. 远程仓库（Remote repositories）
 
 在使用 Git 进行多人协同工作时，一般会有一台电脑充当服务器的角色，每天24小时开机，其他每个人都从这个“服务器”仓库克隆一份到自己的电脑上，并且各自把各自的提交推送到服务器仓库里，也从服务器仓库中拉取别人的提交。
 
 这个“服务器”仓库就是一个远程仓库。
 
 **推荐阅读：**
+
 - [Git Basics - Working with Remotes](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes)
 
-#### SSH key
+#### 3. SSH key
 
 一般本地 Git 仓库和远程 Git 仓库之间的传输是通过 SSH 加密的，所以需要设置一下 SSH key。
 
@@ -62,10 +63,11 @@ Git 还有一个优势就是极其强大的分支管理。
 当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
 
 
-#### GitHub
+#### 4. GitHub
 
 
 如果你先在本地创建了 Git 仓库，然后又在 GitHub 上创建了一个远程仓库，如何将本地的 Git 仓库跟 GitHub 上的 Git 仓库关联起来？
+
 ```
 # push an existing repository from the command line
 
@@ -76,19 +78,87 @@ $ git push -u origin master
 由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
 
 比如，以后只要本地作了提交，就可以通过命令：
+
 ```
 $ git push origin master
 ```
 把本地 master 分支的最新修改推送至 GitHub 上的远程仓库了。
 
-#### 分支（Branching）
+#### 5. 分支（Branching）
 
 分支特性能够让我们在不影响“主线开发进程”的情况下，去继续做一些其他开发任务，并且在最终可以将结果合并到“主开发进程”上。
 
 Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，其特点在于轻量、即时、快速。很多其他的 VCS 工具也可以实现分支开发，但是都是需要将整个项目代码重新拷贝一份，这样既低效又费时，而且还占用大量空间。
 
+##### 5.1 分支的本质
 
-**推荐阅读：**
+分支的本质实际上是指针的控制，切换和合并分支实际上是调整相关指针的指向。
+
+每次提交，Git 都把它们串成一条时间线，master 分支对应的 master 指针，指向最近的一次提交，而 HEAD 指针指向的是当前分支。
+
+（1）提交：每次提交，当前分支都会向前移动一步，这样，随着你不断提交，当前分支的线也越来越长。
+
+```
+            HEAD
+              ↓
+            master
+              ↓
+----o----o----o
+             
+注：圆圈“o”代表一次 commit
+```
+
+（2）创建并切换到新分支：执行 `checkout -b dev` 时，Git 新建了一个指针叫 dev，指向 master 相同的提交，再把 HEAD 指向 dev，就表示当前分支在 dev 上。
+
+```
+            master
+              ↓
+----o----o----o
+              ↑
+             dev
+              ↑
+            HEAD
+
+```
+
+（3）切换分之后的提交：每新提交一次，dev 指针和 HEAD 指针往前移动一步，而 master 指针不变。
+```
+            master
+              ↓
+----o----o----o~~~~●
+                   ↑
+                  dev
+                   ↑
+                 HEAD
+
+```
+（4）合并分支：把 dev 合并到 master 上，其实就是直接把 master 指向 dev 的当前提交。
+
+```
+                master
+                   ↓
+----o----o----o~~~~●
+                   ↑
+                  dev
+                   ↑
+                 HEAD
+
+```
+
+（5）删除分支：删除 dev 分支就是把 dev 指针给删掉，删掉后，我们就剩下了一条 master 分支。
+
+```
+                master
+                   ↓
+----o----o----o~~~~●
+```
+
+
+
+
+**推荐阅读：** 
+           
+- [创建和合并分支 - 廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000)
 - [Git Branching - Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
 
 ### 命令
