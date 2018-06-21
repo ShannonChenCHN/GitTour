@@ -154,36 +154,41 @@ Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，�
 ```
 
 
-
 **推荐阅读：** 
            
 - [创建和合并分支 - 廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000)
 - [Git Branching - Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
 
-### 命令
+### 四、命令
 
-#### 基本
-- git init，初始化一个Git仓库
-- git add <file>，添加文件修改内容到暂存区
-- git stage <file>，git add 的同义命令
-- git rm <file>，删除文件后，将修改内容同步到暂存区，用 git add 也可实现同样的效果
-- git commit [-m <msg>]，把修改后的内容提交到仓库
-- git status，工作区当前的状态
-- git diff，查看修改内容
-- git reset --hard <commit>，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本，当然，严格来讲，HEAD 是指向的不是提交而是当前分支）
-- git log，查看 commit 历史记录，以便确定要回退到哪个版本
-- git reflog，查看 HEAD  修改的历史记录，可以用来切换到以前的某次 commit 版本
+#### 1. 基本
+- `git init`，初始化一个Git仓库
+- `git add <file>`，添加文件修改内容到暂存区
+- `git stage <file>`，git add 的同义命令
+- `git rm <file>`，删除文件后，将修改内容同步到暂存区，用 git add 也可实现同样的效果
+- `git commit [-m <msg>]`，把修改后的内容提交到仓库
+- `git status`，工作区当前的状态
+- `git diff`，查看修改内容
+- `git reset --hard <commit>`，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本，当然，严格来讲，HEAD 是指向的不是提交而是当前分支）
+- `git log`，查看 commit 历史记录，以便确定要回退到哪个版本
+- `git reflog`，查看 HEAD  修改的历史记录，可以用来切换到以前的某次 commit 版本
 
 
-#### 分支
-- git branch，查看当前分支
-- git branch <name>，创建新分支
-- git checkout <name>，切换分支
-- git checkout -b <name>，创建+切换分支
-- git merge，合并分支到当前分支
-- git branch -d <name>，删除分支
+#### 2. 分支
+- `git branch`，查看当前分支
+- `git branch <name>`，创建新分支
+- `git checkout <name>`，切换分支
+- `git checkout -b <name>`，创建+切换分支
+- `git merge`，合并分支到当前分支
+- `git branch -d <name>`，删除分支
+- `git log --graph`，查看分支合并图
 
-### 解决冲突
+### 五、解决冲突
+
+当因为两个不同分支修改了相同文件而导致 Git 无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+
+解决冲突就是把 Git 合并失败的文件手动编辑为我们希望的内容，再提交。Git 会用 `<<<<<<<`，`=======`，`>>>>>>>` 标记出不同分支的内容。
+
 
 ### 参考
 - [廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
