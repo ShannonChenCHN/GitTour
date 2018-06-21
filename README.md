@@ -44,11 +44,14 @@ Git 还有一个优势就是极其强大的分支管理。
 ![](./img/0.jpg)
 ![](./img/1.png)
 
-#### 远程仓库
+#### 远程仓库（Remote repositories）
 
 在使用 Git 进行多人协同工作时，一般会有一台电脑充当服务器的角色，每天24小时开机，其他每个人都从这个“服务器”仓库克隆一份到自己的电脑上，并且各自把各自的提交推送到服务器仓库里，也从服务器仓库中拉取别人的提交。
 
 这个“服务器”仓库就是一个远程仓库。
+
+**推荐阅读：**
+- [Git Basics - Working with Remotes](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes)
 
 #### SSH key
 
@@ -59,9 +62,38 @@ Git 还有一个优势就是极其强大的分支管理。
 当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
 
 
+#### GitHub
+
+
+如果你先在本地创建了 Git 仓库，然后又在 GitHub 上创建了一个远程仓库，如何将本地的 Git 仓库跟 GitHub 上的 Git 仓库关联起来？
+```
+# push an existing repository from the command line
+
+$ git remote add origin git@github.com:ShannonChenCHN/GitTour.git
+$ git push -u origin master
+```
+
+由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+比如，以后只要本地作了提交，就可以通过命令：
+```
+$ git push origin master
+```
+把本地 master 分支的最新修改推送至 GitHub 上的远程仓库了。
+
+#### 分支（Branching）
+
+分支特性能够让我们在不影响“主线开发进程”的情况下，去继续做一些其他开发任务，并且在最终可以将结果合并到“主开发进程”上。
+
+Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，其特点在于轻量、即时、快速。很多其他的 VCS 工具也可以实现分支开发，但是都是需要将整个项目代码重新拷贝一份，这样既低效又费时，而且还占用大量空间。
+
+
+**推荐阅读：**
+- [Git Branching - Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
 
 ### 命令
 
+#### 基本
 - git init，初始化一个Git仓库
 - git add <file>，添加文件修改内容到暂存区
 - git stage <file>，git add 的同义命令
@@ -69,9 +101,19 @@ Git 还有一个优势就是极其强大的分支管理。
 - git commit [-m <msg>]，把修改后的内容提交到仓库
 - git status，工作区当前的状态
 - git diff，查看修改内容
-- git reset --hard <commit>，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本）
+- git reset --hard <commit>，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本，当然，严格来讲，HEAD 是指向的不是提交而是当前分支）
 - git log，查看 commit 历史记录，以便确定要回退到哪个版本
 - git reflog，查看 HEAD  修改的历史记录，可以用来切换到以前的某次 commit 版本
+
+
+#### 分支
+- git branch，查看当前分支
+- git branch <name>，创建新分支
+- git checkout <name>，切换分支
+- git checkout -b <name>，创建+切换分支
+- git merge，合并分支到当前分支
+- git branch -d <name>，删除分支
+
 
 ### 参考
 - [廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
