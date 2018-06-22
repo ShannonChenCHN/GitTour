@@ -84,13 +84,13 @@ $ git push origin master
 ```
 把本地 master 分支的最新修改推送至 GitHub 上的远程仓库了。
 
-#### 5. 分支（Branching）
+### 四、 分支（Branching）
 
 分支特性能够让我们在不影响“主线开发进程”的情况下，去继续做一些其他开发任务，并且在最终可以将结果合并到“主开发进程”上。
 
 Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，其特点在于轻量、即时、快速。很多其他的 VCS 工具也可以实现分支开发，但是都是需要将整个项目代码重新拷贝一份，这样既低效又费时，而且还占用大量空间。
 
-##### 5.1 分支的本质
+#### 1. 分支的本质
 
 分支的本质实际上是指针的控制，切换和合并分支实际上是调整相关指针的指向。
 
@@ -162,7 +162,13 @@ Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，�
 
 
 
-#### 5.2 分支管理
+#### 2. 分支策略
+
+- master：主分支，这个分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面开发；
+- dev 分支：辅助分支，平时的开发都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+- 个人开发分支：每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+
+#### 3. 分支管理
 
 
 直接使用 `git merge` 合并分支时，默认情况下，Git 执行“快进式合并”（fast-farward merge），会直接将 master 分支指向 dev 分支。
@@ -190,7 +196,10 @@ Merge made by the 'recursive' strategy.
 ![](./img/3.png)
 
 
-**详细图解：**
+**小结：**
+
+合并分支时，加上 `--no-ff` 参数就可以用 recursive 模式合并，合并后的历史有分支，能看出来曾经做过合并，而 fast forward 合并就看不出来曾经做过合并（可以借助 `git log --graph` 命令）。
+
 <div style="width: 50%; margin: 0 auto;">Hello</div>
 <div align="center"><img src="./img/4.png"></div>
 <p><center>合并前</center></p>
@@ -207,7 +216,69 @@ Merge made by the 'recursive' strategy.
 - [Git分支管理策略](http://www.ruanyifeng.com/blog/2012/07/git.html)
 - [Understanding the Git Workflow](https://sandofsky.com/blog/git-workflow.html)
 
-### 四、命令
+
+### 五、解决冲突
+
+当因为两个不同分支修改了相同文件而导致 Git 无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+
+解决冲突就是把 Git 合并失败的文件手动编辑为我们希望的内容，再提交。Git 会用 `<<<<<<<`，`=======`，`>>>>>>>` 标记出不同分支的内容。
+
+
+```
+                    HEAD
+                     ↓
+                   master
+                     ↓
+----o----o----o--o---●
+               \    /
+                \  / 
+                 o
+                 ↑
+              feature_01
+
+```
+
+### 六、储藏和清理（git stash）
+
+有时，当你在项目的一部分上已经工作一段时间后，所有东西都进入了混乱的状态，而这时你想要切换到另一个分支做一点别的事情。 问题是，你不想仅仅因为过会儿回到这一点而为做了一半的工作创建一次提交。 这个时候 git stash 就派上用场了。
+
+储藏会处理工作目录的脏的状态，也就是修改的跟踪文件与暂存改动，然后将未完成的修改保存到一个栈上，而你可以在任何时候重新应用这些改动。
+
+#### 6.1 储藏工作
+
+在改动文件后，执行 `git stash` 即可 stash 修改的内容（包括已经被添加到暂存区的修改内容）：
+
+```
+$ git stash 
+```
+
+查看 stash 列表：
+
+```
+$ git stash list
+```
+
+#### 6.2 应用储藏
+一是用 git stash apply 恢复，但是恢复后，stash 内容并不删除，你需要用 git stash drop 来删除:
+
+```
+$ git stash apply stash@{0}
+$ git stash drop stash@{0}
+```
+
+另一种方式是用 git stash pop，恢复的同时把 stash 内容也删了：
+
+```
+$ git stash pop stash@{0}
+```
+
+
+
+**参考**
+
+- [Git 工具 - 储藏与清理](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%82%A8%E8%97%8F%E4%B8%8E%E6%B8%85%E7%90%86)
+
+### 七、常用命令
 
 #### 1. 基本
 - `git init`，初始化一个Git仓库
@@ -235,27 +306,16 @@ Merge made by the 'recursive' strategy.
 - `git merge --on-ff <branch-name>`，合并分支到当前分支，同时创建一个新的 commit
 - `git branch -d <branch-name>`，删除分支
 - `git log --graph`，查看分支合并图
+- `git log --graph --pretty=oneline --abbrev-commit`，查看简洁形式的分支合并图
 
-### 五、解决冲突
+#### 4. 其他
+- `git stash`，储藏
+- `git stash list`，查看储藏列表
+- `git stash apply [<stash>]`，取出储藏的记录，如果不指定一个储藏，Git 认为指定的是最近的储藏
+- `git stash pop [<stash>]`，跟 apply 作用相同，但是会在应用储藏后将其移除
+- `git stash drop`：移除储藏
 
-当因为两个不同分支修改了相同文件而导致 Git 无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
 
-解决冲突就是把 Git 合并失败的文件手动编辑为我们希望的内容，再提交。Git 会用 `<<<<<<<`，`=======`，`>>>>>>>` 标记出不同分支的内容。
-
-
-```
-                    HEAD
-                     ↓
-                   master
-                     ↓
-----o----o----o--o---●
-               \    /
-                \  / 
-                 o
-                 ↑
-              feature_01
-
-```
 
 ### 参考
 - [廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
