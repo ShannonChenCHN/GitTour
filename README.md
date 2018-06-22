@@ -106,6 +106,7 @@ Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，�
 ----o----o----o
              
 注：圆圈“o”代表一次 commit
+
 ```
 
 （2）创建并切换到新分支：执行 `checkout -b dev` 时，Git 新建了一个指针叫 dev，指向 master 相同的提交，再把 HEAD 指向 dev，就表示当前分支在 dev 上。
@@ -122,6 +123,7 @@ Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，�
 ```
 
 （3）切换分之后的提交：每新提交一次，dev 指针和 HEAD 指针往前移动一步，而 master 指针不变。
+
 ```
             master
               ↓
@@ -153,11 +155,50 @@ Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，�
 ----o----o----o~~~~●
 ```
 
-
 **推荐阅读：** 
            
 - [创建和合并分支 - 廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000)
 - [Git Branching - Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
+
+
+
+#### 5.2 分支管理
+
+
+直接使用 `git merge` 合并分支时，默认情况下，Git 执行“快进式合并”（fast-farward merge），会直接将 master 分支指向 dev 分支。
+
+![](./img/2.png)
+
+另一种合并分支的方式是 `git merge --no-ff dev`，使用 `--no-ff` 参数后，会执行正常合并，并在 master 分支上生成一个新节点，也就是生成一个新的 commit，这样从分支历史上就可以看出分支信息。
+
+![](./img/3.png)
+
+加上 `-m` 参数，可以把 commit 注释同时写上去：
+
+```
+$ git merge --no-ff -m "merge with no-ff" dev
+Merge made by the 'recursive' strategy.
+ README.md | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+```
+
+
+**详细图解：**
+<div style="width: 50%; margin: 0 auto;">Hello</div>
+<div align="center"><img src="./img/4.png"></div>
+<p><center>合并前</center></p>
+ 
+<div align="center"><img src="./img/5.png"></div>
+<p><center>使用 git merge 合并</center></p>
+
+
+<div align="center"><img src="./img/6.png"></div>
+<p><center>使用 git merge --no-off 合并</center></p>
+
+**推荐阅读：**
+
+- [Git分支管理策略](http://www.ruanyifeng.com/blog/2012/07/git.html)
+- [Understanding the Git Workflow](https://sandofsky.com/blog/git-workflow.html)
 
 ### 四、命令
 
@@ -169,18 +210,23 @@ Git 的分支功能是一个能够秒杀其他版本控制系统的 feature，�
 - `git commit [-m <msg>]`，把修改后的内容提交到仓库
 - `git status`，工作区当前的状态
 - `git diff`，查看修改内容
-- `git reset --hard <commit>`，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本，当然，严格来讲，HEAD 是指向的不是提交而是当前分支）
 - `git log`，查看 commit 历史记录，以便确定要回退到哪个版本
 - `git reflog`，查看 HEAD  修改的历史记录，可以用来切换到以前的某次 commit 版本
 
 
-#### 2. 分支
+#### 2. 撤销
+- `git checkout -- <file>`，可以丢弃工作区的修改，也就是撤销 `git add` 的操作
+- `git reset HEAD <file>`，把暂存区的修改撤销掉（unstage），重新放回工作区，也就是撤销`git commit` 的操作
+- `git reset --hard <commit>`，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本，当然，严格来讲，HEAD 是指向的不是提交而是当前分支）
+
+#### 3. 分支
 - `git branch`，查看当前分支
-- `git branch <name>`，创建新分支
-- `git checkout <name>`，切换分支
-- `git checkout -b <name>`，创建+切换分支
-- `git merge`，合并分支到当前分支
-- `git branch -d <name>`，删除分支
+- `git branch <banch-name>`，创建新分支
+- `git checkout <branch-name>`，切换分支
+- `git checkout -b <branch-name>`，创建+切换分支
+- `git merge <branch-name>`，合并分支到当前分支
+- `git merge --on-ff <branch-name>`，合并分支到当前分支，同时创建一个新的 commit
+- `git branch -d <branch-name>`，删除分支
 - `git log --graph`，查看分支合并图
 
 ### 五、解决冲突
