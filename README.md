@@ -256,6 +256,11 @@ Merge made by the 'recursive' strategy.
 
 在本地分支修改文件并且 commit 之后，如果远程相同分支的仓库也有修改，此时如果直接执行 git pull 就会出现提交历史分叉的情况（因为实际上本地和远程的是同一个分支，是不应该出现分叉的），为了让提交记录看起来更合理一些，我们可以使用 git rebase 来实现。
 
+
+##### 4.1 git rebase
+
+第一种方式是，在 git fetch 或者 git pull 之后，手动执行 git rebase。
+
 **示例**
 
 初始状态：
@@ -297,10 +302,33 @@ Merge made by the 'recursive' strategy.
 * 717b632 - Update README for recursive merge (3 days ago) <Shannon Chen>
 ```
 
+#### 4.2 git pull --rebase
 
 另一种 Rebase 的快捷操作方式是在 `git pull` 时加上 --rebase 参数：
 
+```shell
+$ git pull --rebase origin rel/0.14
+remote: Counting objects: 102, done
+remote: Finding sources: 100% (53/53)
+remote: Total 53 (delta 29), reused 35 (delta 29)
+Unpacking objects: 100% (53/53), done.
+From ssh://ssssss.xxxxxx.com:29418/Wireless/IOS
+ * branch            rel/7.14   -> FETCH_HEAD
+   a59d806..fbaa680  rel/7.14   -> origin/rel/0.14
+First, rewinding head to replay your work on top of it...
+```
 
+#### 4.3 `git pull` VS. `git pull --rebase`
+
+`git pull` = `git fetch` + `git merge` against tracking upstream branch.
+
+`git pull --rebase` ≈ `git fetch` + `git rebase` against tracking upstream branch.
+
+**参考：**
+
+- [Difference between git pull and git pull --rebase](https://stackoverflow.com/questions/18930527/difference-between-git-pull-and-git-pull-rebase)
+- [What's the difference between 'git merge' and 'git rebase'?](https://stackoverflow.com/questions/16666089/whats-the-difference-between-git-merge-and-git-rebase/16666418#16666418)
+- [Merge or Rebase?](https://blog.sourcetreeapp.com/2012/08/21/merge-or-rebase/)
 
 ### 五、解决冲突
 
@@ -445,10 +473,29 @@ $ git stash pop stash@{0}
 
 ### 其他
 
+#### 1. 通过配置 .gitignore 来忽略某些不需要加入版本控制的文件
 
+
+- [忽略特殊文件](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013758404317281e54b6f5375640abbb11e67be4cd49e0000)
+- [github/gitignore](https://github.com/github/gitignore)
+
+#### 2. 搭建 Git 服务器
+
+- [搭建 Git 服务器](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
+
+#### 3. 配置别名
+
+- [配置别名](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000)
+
+### CheatSheet
+
+- [Git Cheat Sheet - Git Tower](https://www.git-tower.com/blog/git-cheat-sheet/)
+- [Git Cheat Sheet - GitHub Professional Services](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
 
 ### 参考
+- [Git 官方网站](http://git-scm.com)
 - [廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 - [Pro Git](https://git-scm.com/book/zh/v2)
 - [How to undo the most recent commits in Git?](https://stackoverflow.com/questions/927358/how-to-undo-the-most-recent-commits-in-git)
 - [Git - Undo pushed commits](https://stackoverflow.com/questions/22682870/git-undo-pushed-commits)
+- [面试中的那些 git 问题](https://xiaozhuanlan.com/topic/5810792463)
