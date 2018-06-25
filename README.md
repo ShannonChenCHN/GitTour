@@ -468,6 +468,14 @@ $ git stash pop stash@{0}
 
 #### 3. 配置别名
 
+例如：
+
+```
+$ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+```
+这样使用 `git lg` 命令就可以查看非常漂亮的 log 了。
+
+**参考**
 - [配置别名](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000)
 
 ### 十、常用命令
@@ -482,7 +490,7 @@ $ git stash pop stash@{0}
 - `git diff`，查看修改内容
 - `git log`，查看 commit 历史记录，以便确定要回退到哪个版本
 - `git reflog`，查看 HEAD  修改的历史记录，可以用来切换到以前的某次 commit 版本
-
+- `git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit`，查看自定义格式的日志
 
 #### 2. 撤销
 - `git checkout -- <file>`，可以丢弃工作区的修改，也就是撤销 `git add` 的操作
