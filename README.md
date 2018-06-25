@@ -330,6 +330,29 @@ First, rewinding head to replay your work on top of it...
 - [What's the difference between 'git merge' and 'git rebase'?](https://stackoverflow.com/questions/16666089/whats-the-difference-between-git-merge-and-git-rebase/16666418#16666418)
 - [Merge or Rebase?](https://blog.sourcetreeapp.com/2012/08/21/merge-or-rebase/)
 
+
+#### 4.5 Cherry Pick
+
+与 git merge 类似，git cherry pick 也是将一个分支上的 commit 合并到另一个分支上，不同的是 git cherry pick 仅仅是合并分支上的一个或一部分 commit 到另一个分支上，而不是所有 commit。
+
+使用方法：
+
+（1）切换到目标分支：
+```
+git checkout <target-branch>
+```
+（2）pick 指定的 commit
+```
+git cherry-pick <commit-hash>
+```
+
+**参考：**
+
+- [Cherry-Pick | 一日一 Git](https://juejin.im/post/5925a2d9a22b9d0058b0fd9b)
+- [What does cherry-picking a commit with git mean?](https://stackoverflow.com/questions/9339429/what-does-cherry-picking-a-commit-with-git-mean)
+- [CHERRY-PICKING EXPLAINED](http://think-like-a-git.net/sections/rebase-from-the-ground-up/cherry-picking-explained.html)
+- [https://git-scm.com/docs/git-cherry-pick](https://git-scm.com/docs/git-cherry-pick)
+
 ### 五、解决冲突
 
 当因为两个不同分支修改了相同文件而导致 Git 无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
@@ -429,7 +452,23 @@ $ git stash pop stash@{0}
 
 删除远程的 tag：先通过 `git tag -d <tagname>` 从本地删除，然后再通过 `git push origin :refs/tags/<tagname>` 删除远程的 tag。
 
-### 九、常用命令
+### 九、其他
+
+#### 1. 通过配置 .gitignore 来忽略某些不需要加入版本控制的文件
+
+
+- [忽略特殊文件](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013758404317281e54b6f5375640abbb11e67be4cd49e0000)
+- [github/gitignore](https://github.com/github/gitignore)
+
+#### 2. 搭建 Git 服务器
+
+- [搭建 Git 服务器](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
+
+#### 3. 配置别名
+
+- [配置别名](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000)
+
+### 十、常用命令
 
 #### 1. 基本
 - `git init`，初始化一个Git仓库
@@ -469,25 +508,8 @@ $ git stash pop stash@{0}
 - `git stash pop [<stash>]`，跟 apply 作用相同，但是会在应用储藏后将其移除
 - `git stash drop`：移除储藏
 
-### Cherry Pick
 
-### 其他
-
-#### 1. 通过配置 .gitignore 来忽略某些不需要加入版本控制的文件
-
-
-- [忽略特殊文件](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013758404317281e54b6f5375640abbb11e67be4cd49e0000)
-- [github/gitignore](https://github.com/github/gitignore)
-
-#### 2. 搭建 Git 服务器
-
-- [搭建 Git 服务器](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
-
-#### 3. 配置别名
-
-- [配置别名](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000)
-
-### CheatSheet
+### 十一、CheatSheet
 
 - [Git Cheat Sheet - Git Tower](https://www.git-tower.com/blog/git-cheat-sheet/)
 - [Git Cheat Sheet - GitHub Professional Services](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
