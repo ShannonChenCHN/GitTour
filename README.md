@@ -328,6 +328,7 @@ First, rewinding head to replay your work on top of it...
 
 **参考：**
 
+- [Git 分支 - 变基](https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA)
 - [Difference between git pull and git pull --rebase](https://stackoverflow.com/questions/18930527/difference-between-git-pull-and-git-pull-rebase)
 - [What's the difference between 'git merge' and 'git rebase'?](https://stackoverflow.com/questions/16666089/whats-the-difference-between-git-merge-and-git-rebase/16666418#16666418)
 - [Merge or Rebase?](https://blog.sourcetreeapp.com/2012/08/21/merge-or-rebase/)
