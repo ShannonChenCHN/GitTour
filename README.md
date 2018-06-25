@@ -298,6 +298,10 @@ Merge made by the 'recursive' strategy.
 ```
 
 
+另一种 Rebase 的快捷操作方式是在 `git pull` 时加上 --rebase 参数：
+
+
+
 ### 五、解决冲突
 
 当因为两个不同分支修改了相同文件而导致 Git 无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
@@ -375,7 +379,29 @@ $ git stash pop stash@{0}
 参考：
 - [Git - git-blame Documentation](https://git-scm.com/docs/git-blame)
 
-### 八、常用命令
+### 八、打标签
+
+像其他版本控制系统（VCS）一样，Git 可以给历史中的某一个提交打上标签，以示重要。 比较有代表性的是人们会使用这个功能来标记发布结点（v1.0 等等）。
+
+`git tag`，查看所有 tag
+
+`git tag <name>`，创建 tag，默认为 HEAD
+
+`git tag <name> [<commit-id>]`，基于某个 commit 创建 tag
+
+`git tag -a <name> -m <comment> [<commit-id>]`，创建带注释的 tag
+
+`git show <tagname>`，查看某个 tag 的信息
+
+`git tag -d <tagname>`，删除本地 tag
+
+`git push origin <tagname>`，推送某个标签到远程
+
+`git push origin --tags`，一次性推送全部尚未推送到远程的本地标签
+
+删除远程的 tag：先通过 `git tag -d <tagname>` 从本地删除，然后再通过 `git push origin :refs/tags/<tagname>` 删除远程的 tag。
+
+### 九、常用命令
 
 #### 1. 基本
 - `git init`，初始化一个Git仓库
@@ -416,6 +442,10 @@ $ git stash pop stash@{0}
 - `git stash drop`：移除储藏
 
 ### Cherry Pick
+
+### 其他
+
+
 
 ### 参考
 - [廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
