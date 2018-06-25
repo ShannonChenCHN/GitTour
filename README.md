@@ -493,10 +493,12 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 - `git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit`，查看自定义格式的日志
 
 #### 2. 撤销
-- `git checkout -- <file>`，可以丢弃工作区的修改，也就是撤销 `git add` 的操作
-- `git reset HEAD <file>`，把暂存区的修改撤销掉（unstage），重新放回工作区，也就是撤销`git commit` 的操作
+- `git checkout -- <file>`，可以丢弃工作区的修改
+- `git reset HEAD <file>`，把暂存区的修改撤销掉（unstage），也就是撤销 `git add` 的操作
+- `git reset -- <file>`，把暂存区的修改撤销掉（unstage），撤销 `git add` 的操作
 - `git reset HEAD~`，撤销最近一次的 commit 操作
 - `git reset --hard <commit>`，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本，当然，严格来讲，HEAD 是指向的不是提交而是当前分支）
+
 
 #### 3. 分支
 - `git branch`，查看当前分支
