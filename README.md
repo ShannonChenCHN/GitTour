@@ -254,6 +254,48 @@ Merge made by the 'recursive' strategy.
 
 #### 4. Rebase
 
+在本地分支修改文件并且 commit 之后，如果远程相同分支的仓库也有修改，此时如果直接执行 git pull 就会出现提交历史分叉的情况（因为实际上本地和远程的是同一个分支，是不应该出现分叉的），为了让提交记录看起来更合理一些，我们可以使用 git rebase 来实现。
+
+**示例**
+
+初始状态：
+
+```
+* cce920e - Update README (3 days ago) <Shannon Chen>
+* 717b632 - Update README for recursive merge (3 days ago) <Shannon Chen>
+```
+
+提交了两个 commit 之后：
+
+```
+* 6b3ae3f - (HEAD -> master) Update README (4 seconds ago) <Shannon Chen>
+* b989631 - Update README for stash (4 seconds ago) <Shannon Chen>
+* cce920e - Update README (3 days ago) <Shannon Chen>
+* 717b632 - Update README for recursive merge (3 days ago) <Shannon Chen>
+```
+
+`git pull` 之后，我们的提交记录就会出现分叉的情况：
+
+```
+*   563a77b - (HEAD -> master) Merge branch 'master' of github.com:ShannonChenCHN/GitTour (51 seconds ago) <Shannon Chen>
+|\
+| * c5410d9 - (origin/master) Update LICENSE (2 minutes ago) <ShannonChen>
+* | 3963470 - Update README (69 seconds ago) <Shannon Chen>
+* | ddc3adf - Update README for stash (3 days ago) <Shannon Chen>
+|/
+* cce920e - Update README (3 days ago) <Shannon Chen>
+* 717b632 - Update README for recursive merge (3 days ago) <Shannon Chen>
+```
+
+执行一下 `git rebase` 之后，提交记录就变成直线了：
+
+```
+* 6b3ae3f - (HEAD -> master) Update README (4 seconds ago) <Shannon Chen>
+* b989631 - Update README for stash (4 seconds ago) <Shannon Chen>
+* c5410d9 - (origin/master) Update LICENSE (9 minutes ago) <ShannonChen>
+* cce920e - Update README (3 days ago) <Shannon Chen>
+* 717b632 - Update README for recursive merge (3 days ago) <Shannon Chen>
+```
 
 
 ### 五、解决冲突
