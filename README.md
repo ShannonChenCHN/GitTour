@@ -500,6 +500,8 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 
 **参考**
 - [Git Basics: Adding more changes to your last commit](https://medium.com/@igor_marques/git-basics-adding-more-changes-to-your-last-commit-1629344cb9a8)
+- [The dangerous SourceTree setting](https://lostechies.com/sharoncichelli/2015/02/18/the-dangerous-sourcetree-setting/)
+- [How to modify existing, unpushed commits?](https://stackoverflow.com/questions/179123/how-to-modify-existing-unpushed-commits)
 
 ### 十、常用命令
 
