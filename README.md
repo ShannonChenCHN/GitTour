@@ -479,6 +479,28 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 **参考**
 - [配置别名](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000)
 
+#### 4. 生成 pacth 和应用 patch
+
+- 生成 pacth，就是导出修改的信息。
+- 应用 patch，就是将 pacth 文件应用于 git 管理的文件中。
+
+应用场景：
+- 将你修改内容导出来，发送给你的队友去修改。
+- 某个分支上的修改不能直接通过 cherry pick 来实现，这个时候，就可以通过导出 pacth 再应用 patch 的方式来做到了。
+
+**参考**
+- [Git - git-format-patch Documentation](https://git-scm.com/docs/git-format-patch)
+- [Git - git-diff Documentation](https://git-scm.com/docs/git-diff)
+- [Git - git-apply Documentation](https://git-scm.com/docs/git-apply)
+- [Git的Patch功能](https://www.cnblogs.com/y041039/articles/2411600.html)
+
+#### 5. amend commit
+
+修改已经提交的 commit，比如将新的修改合并到上一次的 commit 中，就可以用到这个命令。
+
+**参考**
+- [Git Basics: Adding more changes to your last commit](https://medium.com/@igor_marques/git-basics-adding-more-changes-to-your-last-commit-1629344cb9a8)
+
 ### 十、常用命令
 
 #### 1. 基本
