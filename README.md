@@ -524,6 +524,8 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 - `git reset HEAD~`，撤销最近一次的 commit 操作
 - `git reset --hard <commit>`，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本，当然，严格来讲，HEAD 是指向的不是提交而是当前分支）
 
+> 注：上面的 commit 撤销操作只对本地的 commit 起作用，如果要想撤销已经 push 的 commit，有两种方式，一种是[直接 revert，生成一个新的提交记录](https://stackoverflow.com/a/22683231)，另一种是[ reset 后再强制 push](https://stackoverflow.com/a/31937298)，推荐使用第一种方式。
+
 
 #### 3. 分支
 - `git branch`，查看当前分支
