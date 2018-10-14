@@ -2,6 +2,42 @@
 
 # GitTour
 
+- [一、Git 简介](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E4%B8%80git-%E7%AE%80%E4%BB%8B)
+- [二、Git 的安装](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E4%BA%8Cgit-%E7%9A%84%E5%AE%89%E8%A3%85)
+- [三、一些概念](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E4%B8%89%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5)
+  - 1. 工作区和暂存区
+  - 2. 远程仓库（Remote repositories）
+  - 3. SSH key
+  - 4. GitHub
+- [四、 分支（Branching）](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E5%9B%9B-%E5%88%86%E6%94%AFbranching)
+  - 1. 分支的本质
+  - 2. 分支策略
+  - 3. 分支管理
+  - 4. Rebase
+  - 5. Cherry Pick
+- [五、解决冲突](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E4%BA%94%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81)
+- [六、储藏和清理（git stash）](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E5%85%AD%E5%82%A8%E8%97%8F%E5%92%8C%E6%B8%85%E7%90%86git-stash)
+  - 6.1 储藏工作
+  - 6.2 应用储藏
+- [七、查看修改记录](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E4%B8%83%E6%9F%A5%E7%9C%8B%E4%BF%AE%E6%94%B9%E8%AE%B0%E5%BD%95)
+  - 1. git log
+  - 2. git blame
+- [八、打标签](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E5%85%AB%E6%89%93%E6%A0%87%E7%AD%BE)
+- [九、其他](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E4%B9%9D%E5%85%B6%E4%BB%96)
+  - 1. 通过配置 .gitignore 来忽略某些不需要加入版本控制的文件
+  - 2. 搭建 Git 服务器
+  - 3. 配置别名
+  - 4. 生成 pacth 和应用 patch
+  - 5. amend commit
+- [十、常用命令](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E5%8D%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4)
+  - 1. 基本
+  - 2. 撤销
+  - 3. 分支
+  - 4. 其他
+- 十一、常见问题
+- [十二、CheatSheet](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E5%8D%81%E4%B8%80cheatsheet)
+- 参考
+
 
 ### 一、Git 简介
 
@@ -548,7 +584,12 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 - `git stash drop`：移除储藏
 
 
-### 十一、CheatSheet
+
+### 十一、常见问题
+
+详见[版本控制：Git 和 SVN](https://github.com/ShannonChenCHN/iOSLevelingUp/issues/43)。
+
+### 十二、CheatSheet
 
 - [Git Cheat Sheet - Git Tower](https://www.git-tower.com/blog/git-cheat-sheet/)
 - [Git Cheat Sheet - GitHub Professional Services](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
