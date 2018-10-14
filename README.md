@@ -34,8 +34,8 @@
   - 2. 撤销
   - 3. 分支
   - 4. 其他
-- 十一、常见问题
-- [十二、CheatSheet](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E5%8D%81%E4%B8%80cheatsheet)
+- [十一、常见问题](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E5%8D%81%E4%B8%80%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+- [十二、CheatSheet](https://github.com/ShannonChenCHN/GitTour/blob/master/README.md#%E5%8D%81%E4%BA%8Ccheatsheet)
 - 参考
 
 
@@ -552,6 +552,9 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 - `git log`，查看 commit 历史记录，以便确定要回退到哪个版本
 - `git reflog`，查看 HEAD  修改的历史记录，可以用来切换到以前的某次 commit 版本
 - `git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit`，查看自定义格式的日志
+- `git fetch`，获取远程仓库的更新，这个命令通常用来查看其他人的进程，因为它取回的代码对你本地的开发代码没有影响。获取远程仓库的更新以后，可以在它的基础上，使用 `git merge` 命令或者 `git rebase` 命令，在本地分支上合并远程分支
+
+
 
 #### 2. 撤销
 - `git checkout -- <file>`，可以丢弃工作区的修改
@@ -570,6 +573,8 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 - `git checkout -b <branch-name>`，创建+切换分支
 - `git merge <branch-name>`，合并分支到当前分支
 - `git merge --on-ff <branch-name>`，合并分支到当前分支，同时创建一个新的 commit
+- `git pull <远程主机名> <远程分支名>:<本地分支名>
+`，获取远程仓库某个分支的更新后，再与本地的当前分支合并。实质上，这等同于先做 git fetch，再做 git merge。如果合并需要采用 `rebase` 模式，可以使用 `--rebase` 选项。
 - `git branch -d <branch-name>`，删除分支
 - `git branch -D <branch-name>`，删除未被合并的分支
 - `git log --graph`，查看分支合并图
@@ -597,6 +602,7 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 ### 参考
 - [Git 官方网站](http://git-scm.com)
 - [廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+- [Git远程操作详解 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2014/06/git_remote.html)
 - [Pro Git](https://git-scm.com/book/zh/v2)
 - [How to undo the most recent commits in Git?](https://stackoverflow.com/questions/927358/how-to-undo-the-most-recent-commits-in-git)
 - [Git - Undo pushed commits](https://stackoverflow.com/questions/22682870/git-undo-pushed-commits)
