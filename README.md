@@ -550,6 +550,7 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 - `git status`，工作区当前的状态
 - `git diff`，查看修改内容
 - `git log`，查看 commit 历史记录，以便确定要回退到哪个版本
+- `git log <file-or-path>`，查看某个文件或者某个目录下所有文件的 commit 历史记录
 - `git reflog`，查看 HEAD  修改的历史记录，可以用来切换到以前的某次 commit 版本
 - `git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit`，查看自定义格式的日志
 - `git fetch`，获取远程仓库的更新，这个命令通常用来查看其他人的进程，因为它取回的代码对你本地的开发代码没有影响。获取远程仓库的更新以后，可以在它的基础上，使用 `git merge` 命令或者 `git rebase` 命令，在本地分支上合并远程分支
