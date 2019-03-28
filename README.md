@@ -55,9 +55,23 @@ Git 属于分布式版本控制系统。
 Git 还有一个优势就是极其强大的分支管理。
 
 ### 二、Git 的安装
+
+#### 1. 命令行工具
+
+不同平台都有各自的安装教程（具体安装过程这里就不细说了）：
 - Linux
-- Mac OS
+- macOS（系统自带了）
 - Windows
+
+
+
+#### 2. 客户端
+
+在 macOS 平台上，常见的有以下三种：
+
+- Sourcetree（免费）
+- [GitHub Desktop](https://desktop.github.com/)（免费）
+- Tower（收费）
                        
 
 ### 三、一些概念
@@ -608,3 +622,4 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 - [How to undo the most recent commits in Git?](https://stackoverflow.com/questions/927358/how-to-undo-the-most-recent-commits-in-git)
 - [Git - Undo pushed commits](https://stackoverflow.com/questions/22682870/git-undo-pushed-commits)
 - [面试中的那些 git 问题](https://xiaozhuanlan.com/topic/5810792463)
+- [The Architecture of Open Source Applications (Volume 2): Git](http://www.aosabook.org/en/git.html)
