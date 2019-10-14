@@ -578,6 +578,11 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 - `git reset HEAD~`，撤销最近一次的 commit 操作
 - `git reset --hard <commit>`，切换到某个指定的 commit 版本（HEAD 指向的版本就是当前版本，当然，严格来讲，HEAD 是指向的不是提交而是当前分支）
 
+
+当我们通过 `git checkout` 进行撤销之后，但是仍然可以看到之前新添加的文件，此时就需要使用 clean 命令了：
+- `git clean -f -d`，移除工作区中所有未追踪的文件以及空的子目录
+- `git clean -n -d`，做一次预演告诉你，如果执行 `git clean -f -d` 的话，会移除什么，一般我们在执行 `git clean -f -d` 之前会执行 `git clean -n -d`  
+
 > 注：上面的 commit 撤销操作只对本地的 commit 起作用，如果要想撤销已经 push 的 commit，有两种方式，一种是[直接 revert，生成一个新的提交记录](https://stackoverflow.com/a/22683231)，另一种是[ reset 后再强制 push](https://stackoverflow.com/a/31937298)，推荐使用第一种方式。
 
 
